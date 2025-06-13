@@ -17,9 +17,22 @@ fn main()
             Arg::new("omit_newline")
             .short('n')
             .help("Do not print newline")
-            .action(clap::ArgAction::SetTrue),
+            .action(clap::ArgAction::SetFalse),
         )
         .get_matches();
 
-    println!("{:#?}", _matches);
+    let text: Vec<String> = _matches
+        .get_many::<String>("text")
+        .into_iter()
+        .flatten()
+        .cloned()
+        .collect();
+    let omit_newline = _matches.get_flag("omit_newline");
+
+    // let ending = if omit_newline { "" } else { "\n" };
+
+   
+    print!("{}{}", text.join(" "), if omit_newline { "" } else { "\n" });
+
+    // println!("{:#?}", _matches);
 }
