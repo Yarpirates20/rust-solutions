@@ -1,4 +1,4 @@
-use clap::{Command, Arg};
+use clap::{Arg, ArgAction, Command};
 
 fn main() 
 {
@@ -11,13 +11,13 @@ fn main()
             .value_name("TEXT")
             .help("Input text")
             .required(true)
-            .num_args(1),
+            .action(ArgAction::Append),
         )
         .arg(
             Arg::new("omit_newline")
             .short('n')
             .help("Do not print newline")
-            .action(clap::ArgAction::SetFalse),
+            .action(clap::ArgAction::SetTrue),
         )
         .get_matches();
 
